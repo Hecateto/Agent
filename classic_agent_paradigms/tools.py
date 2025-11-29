@@ -138,8 +138,8 @@ class ToolExecutor:
             schema = info['schema']
             params_desc = ", ".join([f"{k}" for k in schema['parameters']['properties'].keys()])
             prompt_lines.append(f"- {name}({params_desc}): {schema['description']}")
+        prompt_lines.append("- finish(answer): 当你收集到足够信息可以回答用户问题时，调用此工具提交最终答案。")
         return "\n".join(prompt_lines)
-
 
 
 if __name__ == "__main__":
