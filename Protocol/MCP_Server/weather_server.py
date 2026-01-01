@@ -3,6 +3,7 @@ A simple MCP server that provides weather information for a given city.
 """
 import json
 import time
+import urllib.parse
 from datetime import datetime
 from typing import Any
 
@@ -26,7 +27,8 @@ weather_server = MCPServer(name="天气信息服务", description="提供城市�
 def get_weather_data(city: str) -> dict[str, float | str | int | Any] | None:
     """Fetch weather data from a public API."""
     city_en = CITY_MAP.get(city, city)
-    url = f"https://wttr.in/{city_en}?format=j1"
+    safe_city = urllib.parse.quote(city_en)
+    url = f"https://wttr.in/{safe_city}?format=j1"
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
     }
